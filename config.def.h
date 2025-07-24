@@ -112,6 +112,7 @@ static const Layout layouts[] = {
 
 #define STATUSBAR "dwmblocks"
 #include "movestack.c"
+#include <stdlib.h>
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
@@ -187,6 +188,8 @@ static const Key keys[] = {
     { 0,                            XF86XK_AudioLowerVolume, spawn, {.v = down_vol } },
     { 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = up_vol } },
     { MODKEY,                       XK_w,       spawn,         {.v = firefoxcmd } },
+    { MODKEY,                       XK_a,       spawn,         SHCMD("printf 'toggle\n' | tee /tmp/ai-assistant.pipe") },
+
 };
 
 /* button definitions */
