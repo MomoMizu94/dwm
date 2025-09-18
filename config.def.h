@@ -189,6 +189,7 @@ static const Key keys[] = {
     { 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = up_vol } },
     { MODKEY,                       XK_w,       spawn,         {.v = firefoxcmd } },
     { MODKEY,                       XK_a,       spawn,         SHCMD("printf 'toggle\n' | tee /tmp/ai-assistant.pipe") },
+    { MODKEY | ShiftMask,           XK_l,       spawn,         SHCMD("slock") }
 
 };
 
