@@ -95,6 +95,7 @@ static const Layout layouts[] = {
 
 /* key definitions */
 #define MODKEY Mod1Mask
+#define SUPERKEY Mod4Mask
 
 /* Knob keys */
 #define XF86XK_AudioMute        0x1008ff12   /* Mute sound from the system */
@@ -119,10 +120,14 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "rofi", "-show-icons", "-show", "drun", NULL };
 static const char *termcmd[]  = { "kitty", NULL };
 static const char *firefoxcmd[] = { "firefox", NULL };
-static const char *prntscrncmd[] = { "flameshot", "gui", NULL };
 static const char *up_vol[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%", NULL };
 static const char *down_vol[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%",   NULL };
 static const char *mute_vol[] = { "pactl", "set-sink-mute",   "@DEFAULT_SINK@", "toggle", NULL };
+static const char *colorpickercmd[] = { "/bin/sh", "-c", "$HOME/.local/bin/colorpicker.sh", NULL };
+static const char *prntscrncmd_copyarea[] = { "/bin/sh", "-c", "$HOME/.local/bin/screenshot -copy_area", NULL };
+static const char *prntscrncmd_copyfull[] = { "/bin/sh", "-c", "$HOME/.local/bin/screenshot -copy_full", NULL };
+static const char *prntscrncmd_area[] = { "/bin/sh", "-c", "$HOME/.local/bin/screenshot -area", NULL };
+static const char *prntscrncmd_full[] = { "/bin/sh", "-c", "$HOME/.local/bin/screenshot -full", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -183,13 +188,17 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
     { MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {1} },
     { MODKEY,                       XK_s,      togglesticky,   {0} },
-    { 0,                            XK_Print,  spawn,          {.v = prntscrncmd } },
+    { 0,                            XK_Print,  spawn,          {.v = prntscrncmd_copyarea } },
     { 0,                            XF86XK_AudioMute,  spawn,  {.v = mute_vol } },
     { 0,                            XF86XK_AudioLowerVolume, spawn, {.v = down_vol } },
     { 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = up_vol } },
     { MODKEY,                       XK_w,       spawn,         {.v = firefoxcmd } },
     { MODKEY,                       XK_a,       spawn,         SHCMD("printf 'toggle\n' | tee /tmp/ai-assistant.pipe") },
-    { MODKEY | ShiftMask,           XK_l,       spawn,         SHCMD("slock") }
+    { MODKEY | ShiftMask,           XK_l,       spawn,         SHCMD("slock") },
+    { MODKEY,                       XK_Insert,  spawn,         {.v = colorpickercmd } },
+    { 0,                            XK_F12,     spawn,         {.v = prntscrncmd_copyfull } },
+    { MODKEY,                       XK_Print,   spawn,         {.v = prntscrncmd_area } },
+    { MODKEY,                       XK_F12,     spawn,         {.v = prntscrncmd_full } },
 
 };
 
