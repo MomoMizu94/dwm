@@ -32,10 +32,11 @@ static const char col_gray2[]       = "#2e3440";
 static const char col_gray3[]       = "#2e3440";
 static const char col_gray4[]       = "#8FBCBB";
 static const char col_cyan[]        = "#2e3440";
+static const char col_orange[]      = "#ed7a0e";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeSel]  = { col_gray4, col_cyan,  col_orange  },
 	[SchemeStatus]  = { col_gray3, col_gray1,  "#000000"  }, // Statusbar right {text,background,not used but cannot be empty}
 	[SchemeTagsSel]  = { col_gray4, col_cyan,  "#000000"  }, // Tagbar left selected {text,background,not used but cannot be empty}
 	[SchemeTagsNorm]  = { col_gray3, col_gray1,  "#000000"  }, // Tagbar left unselected {text,background,not used but cannot be empty}
@@ -62,6 +63,8 @@ static const Rule rules[] = {
     { "steam",   NULL,     NULL,           1 << 4,    0,          0,           0,        -1 },
     { "obs",     NULL,     NULL,           1 << 1,    0,          0,           0,         1 },
 	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
+    { "gnome-calculator",  NULL, NULL,     0,         1,          0,           0,        -1 },
+
 };
 
 /* Vanitygaps definitions */
@@ -193,12 +196,14 @@ static const Key keys[] = {
     { 0,                            XF86XK_AudioLowerVolume, spawn, {.v = down_vol } },
     { 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = up_vol } },
     { MODKEY,                       XK_w,       spawn,         {.v = firefoxcmd } },
-    { MODKEY,                       XK_a,       spawn,         SHCMD("printf 'toggle\n' | tee /tmp/ai-assistant.pipe") },
+    { MODKEY,                       XK_a,       spawn,         SHCMD("echo toggle > /tmp/ai-assistant.pipe") },
     { MODKEY | ShiftMask,           XK_l,       spawn,         SHCMD("slock") },
     { MODKEY,                       XK_Insert,  spawn,         {.v = colorpickercmd } },
     { 0,                            XK_F12,     spawn,         {.v = prntscrncmd_copyfull } },
     { MODKEY,                       XK_Print,   spawn,         {.v = prntscrncmd_area } },
     { MODKEY,                       XK_F12,     spawn,         {.v = prntscrncmd_full } },
+    { MODKEY,                       XK_F11,     spawn,         SHCMD("echo stop > /tmp/ai-assistant.pipe") },
+
 
 };
 
