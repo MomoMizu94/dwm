@@ -58,7 +58,7 @@ static const Rule rules[] = {
 	{ "kitty",   NULL,     NULL,           0,         0,          1,           0,        -1 },
     { "Spotify", NULL,     NULL,           0,         0,          0,           0,         1 },
     { "discord", NULL,     NULL,           0,         0,          0,           0,         1 },
-    { "thunderbird", NULL, NULL,           1 << 2,    0,          0,           0,        -1 },
+    { "org.mozilla.Thunderbird", NULL, NULL, 1 << 2,  0,          0,           0,        -1 },
     { "Signal", NULL,      NULL,           1 << 3,    0,          0,           0,        -1 },
     { "steam",   NULL,     NULL,           1 << 4,    0,          0,           0,        -1 },
     { "obs",     NULL,     NULL,           1 << 1,    0,          0,           0,         1 },
