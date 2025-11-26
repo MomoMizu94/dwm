@@ -45,7 +45,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "󰣇", "󰅭", "󰛏", "", "󱎓" };
+static const char *tags[] = { "󰣇", "󰶞", "󰚯", "", "", "󰛏", "󰑋", "󰙯" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -56,12 +56,12 @@ static const Rule rules[] = {
 	{ "Gimp",    NULL,     NULL,           0,         0,          0,           0,        -1 },
 	{ "Firefox", NULL,     NULL,           0,         0,          0,          -1,        -1 },
 	{ "kitty",   NULL,     NULL,           0,         0,          1,           0,        -1 },
-    { "Spotify", NULL,     NULL,           0,         0,          0,           0,         1 },
-    { "discord", NULL,     NULL,           0,         0,          0,           0,         1 },
-    { "org.mozilla.Thunderbird", NULL, NULL, 1 << 2,  0,          0,           0,        -1 },
-    { "Signal", NULL,      NULL,           1 << 3,    0,          0,           0,        -1 },
-    { "steam",   NULL,     NULL,           1 << 4,    0,          0,           0,        -1 },
-    { "obs",     NULL,     NULL,           1 << 1,    0,          0,           0,         1 },
+    { "Spotify", NULL,     NULL,           1 << 4,    0,          0,           0,        -1 },
+    { "discord", NULL,     NULL,           1 << 7,    0,          0,           0,        -1 },
+    { "org.mozilla.Thunderbird", NULL, NULL, 1 << 5,  0,          0,           0,        -1 },
+    { "Signal", NULL,      NULL,           1 << 7,    0,          0,           0,        -1 },
+    { "steam",   NULL,     NULL,           1 << 3,    0,          0,           0,        -1 },
+    { "obs",     NULL,     NULL,           1 << 6,    0,          0,           0,        -1 },
 	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
     { "gnome-calculator",  NULL, NULL,     0,         1,          0,           0,        -1 },
 
@@ -136,7 +136,7 @@ static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_b,      togglebar,      {0} },
+	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
@@ -169,7 +169,11 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_space,  setlayout,      {0} },
+	{ MODKEY,                       XK_v,      setlayout,      {.v = &layouts[3]} },
+    { MODKEY,                       XK_b,      setlayout,      {.v = &layouts[5]} },
+    { MODKEY,                       XK_g,      setlayout,      {.v = &layouts[7]} },
+    { MODKEY,                       XK_c,      setlayout,      {.v = &layouts[11]} },
+    { MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY|ShiftMask,             XK_f,      togglefullscr,  {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
@@ -191,20 +195,18 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
     { MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {1} },
     { MODKEY,                       XK_s,      togglesticky,   {0} },
-    { 0,                            XK_Print,  spawn,          {.v = prntscrncmd_copyarea } },
-    { 0,                            XF86XK_AudioMute,  spawn,  {.v = mute_vol } },
+    { 0,                            XK_Print,  spawn,         {.v = prntscrncmd_copyarea } },
+    { 0,                            XF86XK_AudioMute,  spawn, {.v = mute_vol } },
     { 0,                            XF86XK_AudioLowerVolume, spawn, {.v = down_vol } },
     { 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = up_vol } },
-    { MODKEY,                       XK_w,       spawn,         {.v = firefoxcmd } },
-    { MODKEY,                       XK_a,       spawn,         SHCMD("echo toggle > /tmp/ai-assistant.pipe") },
-    { MODKEY | ShiftMask,           XK_l,       spawn,         SHCMD("slock") },
-    { MODKEY,                       XK_Insert,  spawn,         {.v = colorpickercmd } },
-    { 0,                            XK_F12,     spawn,         {.v = prntscrncmd_copyfull } },
-    { MODKEY,                       XK_Print,   spawn,         {.v = prntscrncmd_area } },
-    { MODKEY,                       XK_F12,     spawn,         {.v = prntscrncmd_full } },
-    { MODKEY,                       XK_F11,     spawn,         SHCMD("echo stop > /tmp/ai-assistant.pipe") },
-
-
+    { MODKEY,                       XK_w,      spawn,         {.v = firefoxcmd } },
+    { MODKEY,                       XK_a,      spawn,         SHCMD("echo toggle > /tmp/ai-assistant.pipe") },
+    { MODKEY | ShiftMask,           XK_l,      spawn,         SHCMD("slock") },
+    { MODKEY,                       XK_Insert, spawn,         {.v = colorpickercmd } },
+    { 0,                            XK_F12,    spawn,         {.v = prntscrncmd_copyfull } },
+    { MODKEY,                       XK_Print,  spawn,         {.v = prntscrncmd_area } },
+    { MODKEY,                       XK_F12,    spawn,         {.v = prntscrncmd_full } },
+    { MODKEY,                       XK_F11,    spawn,         SHCMD("echo stop > /tmp/ai-assistant.pipe") },
 };
 
 /* button definitions */
