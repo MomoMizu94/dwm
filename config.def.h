@@ -33,10 +33,13 @@ static const char col_gray3[]       = "#2e3440";
 static const char col_gray4[]       = "#8FBCBB";
 static const char col_cyan[]        = "#2e3440";
 static const char col_orange[]      = "#ed7a0e";
+static const char col_teal[]        = "#71b7d1";
+static const char col_black[]       = "#000000";
+static const char col_yellow[]      = "#ffee00";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_orange  },
+	[SchemeNorm] = { col_gray3, col_gray1, col_black },
+	[SchemeSel]  = { col_gray4, col_cyan,  col_yellow  },
 	[SchemeStatus]  = { col_gray3, col_gray1,  "#000000"  }, // Statusbar right {text,background,not used but cannot be empty}
 	[SchemeTagsSel]  = { col_gray4, col_cyan,  "#000000"  }, // Tagbar left selected {text,background,not used but cannot be empty}
 	[SchemeTagsNorm]  = { col_gray3, col_gray1,  "#000000"  }, // Tagbar left unselected {text,background,not used but cannot be empty}
@@ -62,8 +65,10 @@ static const Rule rules[] = {
     { "Signal", NULL,      NULL,           1 << 7,    0,          0,           0,        -1 },
     { "steam",   NULL,     NULL,           1 << 3,    0,          0,           0,        -1 },
     { "obs",     NULL,     NULL,           1 << 6,    0,          0,           0,        -1 },
-	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* xev */
+	{ NULL,      NULL,     "Event Tester", 0,         0,          0,           1,        -1 }, /* for popup windows */
     { "gnome-calculator",  NULL, NULL,     0,         1,          0,           0,        -1 },
+    { "unityhub", NULL,    NULL,           1 << 2,    0,          0,           0,        -1 },
+    { "tidal-hifi", NULL,  NULL,           1 << 4,    0,          0,           0,        -1 },
 
 };
 
@@ -217,7 +222,6 @@ static const Button buttons[] = {
     /* Systray patchin mukaan kaks ylint rivii kuuluis poistaa? */
     { ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,              Button1,        sigstatusbar,   {.i = 1} },
 	{ ClkStatusText,        0,              Button2,        sigstatusbar,   {.i = 2} },
