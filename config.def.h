@@ -136,6 +136,7 @@ static const char *prntscrncmd_copyarea[] = { "/bin/sh", "-c", "$HOME/.local/bin
 static const char *prntscrncmd_copyfull[] = { "/bin/sh", "-c", "$HOME/.local/bin/screenshot -copy_full", NULL };
 static const char *prntscrncmd_area[] = { "/bin/sh", "-c", "$HOME/.local/bin/screenshot -area", NULL };
 static const char *prntscrncmd_full[] = { "/bin/sh", "-c", "$HOME/.local/bin/screenshot -full", NULL };
+static const char *powermenucmd[] = { "/bin/sh", "-c", "$HOME/.config/rofi/powermenu/powermenu.sh", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -212,6 +213,7 @@ static const Key keys[] = {
     { MODKEY,                       XK_Print,  spawn,         {.v = prntscrncmd_area } },
     { MODKEY,                       XK_F12,    spawn,         {.v = prntscrncmd_full } },
     { MODKEY,                       XK_F11,    spawn,         SHCMD("echo stop > /tmp/ai-assistant.pipe") },
+    { MODKEY | ShiftMask,           XK_p,      spawn,         {.v = powermenucmd } },
 };
 
 /* button definitions */
